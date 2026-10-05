@@ -1,5 +1,5 @@
-#ifndef MP3_H
-#define MP3_H
+#ifndef MP3_VIEW_H
+#define MP3_VIEW_H
 
 #include "types.h" // Contains user defined types
 

@@ -1,33 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-#include "mp3.h"
+#include "mp3_view.h"
 #include "types.h"
 
 /* Array containing the ID3 tag names */
 static const char* tag[] = {"TIT2", "TPE1", "TALB", "TYER", "TCON", "COMM"};
 
-
-//=======================================================================================//
-
-/* 
- * Function: check_operation_type
- * Description: Checks the command-line option entered by the user.
- * 'v' -> View operation
- * 'h' -> Help operation
- * Any other option -> Unsupported operation
- */
-OperationType check_operation_type(char opt)
-{
-    if(opt == 'v')
-    {
-        return e_view;
-    }
-    else if(opt == 'h')
-    {
-        return e_help;
-    }
-    return e_unsupported;
-}
 
 //=======================================================================================//
 
