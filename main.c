@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "types.h"
 #include "mp3_view.h"
 #include "mp3_edit.h"
@@ -13,20 +14,23 @@ int main(int argc, char *argv[])
         printf("USAGE : \n");
         printf("To view please pass like: ./a.out -v filename.mp3\n");
         printf("To edit please pass like: ./a.out -e -t/-a/-A/-m/-y/-c filename.mp3\n");
+        printf("To help menu : \t./a.out --help\n\n");
    }
 
-   if( argc == 3 && check_operation_type(argv[1][1]) == e_view)
+   if( argc == 3 && check_operation_type(argv[1]) == e_view)
    {
         if(read_and_validate_args(argv, &info) == e_failure)
         {
             printf("ERORR : invalid input\n");
             printf("USAGE : \n");
             printf("To view please pass like: ./a.out -v filename.mp3\n");
+            printf("To help menu : \t./a.out --help\n\n");
+
             return 0;
         }
         view_operation(&info);
    }
-   else if( argc == 5 && check_operation_type(argv[1][1]) == e_edit)
+   else if( argc == 5 && check_operation_type(argv[1]) == e_edit)
    {
           EMP3 einfo;
         if(read_and_validate_edit_args(argv, &einfo) == e_failure)
@@ -34,11 +38,13 @@ int main(int argc, char *argv[])
             printf("ERORR : invalid input\n");
             printf("USAGE : \n");
             printf("To edit please pass like: ./a.out -e -t/-a/-A/-m/-y/-c filename.mp3\n");
+            printf("To help menu : \t./a.out --help\n\n");
+
             return 0;
         }
         do_edit_operation(&einfo);
    }
-   else if((check_operation_type(argv[1][1]) == e_help))
+   else if((check_operation_type(argv[1]) == e_help))
    {
      /*                      add new help menu                        */
         printf("\n1.  -v  -->   to view mp3 file contents\n");
@@ -56,6 +62,8 @@ int main(int argc, char *argv[])
         printf("USAGE : \n");
         printf("To view please pass like: ./a.out -v filename.mp3\n");
         printf("To edit please pass like: ./a.out -e -t/-a/-A/-m/-y/-c filename.mp3\n");
+        printf("To help menu : \t./a.out --help\n\n");
+
    }
    
 }
@@ -69,17 +77,17 @@ int main(int argc, char *argv[])
  * 'h' -> Help operation
  * Any other option -> Unsupported operation
  */
-OperationType check_operation_type(char opt)
+OperationType check_operation_type(char *opt)
 {
-    if(opt == 'v')
+    if(opt[1] == 'v')
     {
         return e_view;
     }
-    else if(opt == 'e')
+    else if(opt[1] == 'e')
     {
           return e_edit;
     }
-    else if(opt == 'h')
+    else if(strcmp(opt,"--help") == 0)
     {
         return e_help;
     }

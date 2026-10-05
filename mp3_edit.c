@@ -165,7 +165,9 @@ void do_edit_operation(EMP3 *einfo)
     {
         fwrite(&data, 1, 1, einfo->fptr_mp3_temp);
     }
-
+    
+    remove(einfo->mp3_fname);
+    rename(einfo->mp3_temp_fname,einfo->mp3_fname);
     /* Display successful editing message */
     printf("edited.\n");
 
